@@ -9,11 +9,13 @@ class Input extends Component {
   
       this.state = {
         names: [],
-        deletedNames: []
+        deletedNames: [],
+        showUndoButton: false
       }
   
       this.addName = this.addName.bind(this);
       this.deleteName = this.deleteName.bind(this);
+      this.undoDelete = this.undoDelete.bind(this);
     }
     deleteName(key) {
         var filteredNames = this.state.names.filter(function (name) {
@@ -24,7 +26,8 @@ class Input extends Component {
         });
         this.setState({
             names: filteredNames,
-            deletedNames: deletedName
+            deletedNames: this.state.deletedNames.concat(deletedName),
+            showUndoButton: true
         });
     }
 
@@ -44,7 +47,16 @@ class Input extends Component {
         e.preventDefault();
       }
     
+    undoDelete() {
+        this.setState({
+            names: this.state.names.concat(this.state.deletedNames),
+            deletedNames: [],
+            showUndoButton: false
+
+        })
+    }
     render() {
+        const showing = this.state.showUndoButton;
         return (
         <div className="inputListMain">
             <div className="header">
@@ -55,6 +67,14 @@ class Input extends Component {
                     >
                     </input>
                     <button type="submit">add</button>
+                    { showing
+                        ? <button 
+                            className="delete" 
+                            type="submit"
+                            onClick={this.undoDelete}
+                          >Undo</button>
+                        : null
+                    }
                 </form>
             </div>
             <List 

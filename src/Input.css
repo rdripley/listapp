@@ -13,6 +13,15 @@
     color: #FFF;
     border: 2px solid #0066FF;
   }
+  .inputListMain .header .delete {
+    padding: 10px;
+    font-size: 16px;
+    margin: 10px;
+    margin-right: 0px;
+    background-color: #cc3300;
+    color: #000000;
+    border: 2px solid #cc3300;
+  }
   .inputListMain .header button:hover {
     background-color: #003399;
     border: 2px solid #003399;
