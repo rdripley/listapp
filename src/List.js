@@ -21,11 +21,11 @@ class List extends Component {
     render() {
         var listEntries = this.props.entries;
         var listNames = listEntries.map(this.createNames);
-
+        var sortedNames = listNames.sort((a, b) => a.key > b.key ? 1 : -1);
         return (
             <ul className="theList">
                 <FlipMove duration={250} easing="ease-out">
-                    {listNames}
+                    {sortedNames}
                 </FlipMove>
             </ul>
         );
